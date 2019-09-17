@@ -71,21 +71,48 @@ end
 # Part 3
 
 class BookInStock
-    def initialize(isbn, price)
-        @_isbn = isbn
-        @_price = price.to_f
+    #constructor
+    def initialize(isbn="", price=0)
+        raise(ArgumentError,"lol") if (isbn=="" || price<=0)
+        # raise StandardError.new "this is error"
+        @isbn = isbn
+        @price = price.to_f
         # assuming price is a number
-        if @_isbn=="" || @_price<=0
-            # exception
-        end
-        puts "A book (#{@_isbn}) of $#{@_price} is created!"
+        # if @isbn=="" || @price<=0
+        # unless @isbn!="" && @price>0
+        # end
+        # puts "A book (#{@isbn}) of $#{'%.2f' % @price} is created!"
+    end
+    
+    #getters
+    def price
+        @price
+    end
+    def isbn
+        @isbn
+    end
+    
+    #setters
+    def price=(pr)
+        @price = pr
+    end
+    def isbn=(i)
+        @isbn = i
     end
     
     def price_as_string
-        str = '%.2f' % @_price
+        str = '%.2f' % @price
         return '$' + str
+    end
+    
+    #print function
+    def show
+        puts "ISBN: #{@isbn}, price: #{'%.2f' % @price}"
     end
 end
 
-# b = BookInStock.new("123-88","22.774");
-# b.price_as_string
+
+# b = BookInStock.new("123",234);
+# b.price = 8.889
+# b.isbn = "1234-567-89"
+# b.show
